@@ -177,6 +177,7 @@ charset_cache_free (gpointer data)
 gboolean
 g_get_charset (const char **charset)
 {
+#ifndef ANDROID_STUB
   static GPrivate cache_private = G_PRIVATE_INIT (charset_cache_free);
   GCharsetCache *cache = g_private_get (&cache_private);
   const gchar *raw;
@@ -206,6 +207,9 @@ g_get_charset (const char **charset)
     *charset = cache->charset;
 
   return cache->is_utf8;
+#else
+  return 0;
+#endif
 }
 
 /**

@@ -922,6 +922,7 @@ g_locale_to_utf8 (const gchar  *opsysstring,
 		  gsize        *bytes_written,
 		  GError      **error)
 {
+#ifndef ANDROID_STUB
   const char *charset;
 
   if (g_get_charset (&charset))
@@ -929,6 +930,9 @@ g_locale_to_utf8 (const gchar  *opsysstring,
   else
     return g_convert (opsysstring, len, 
 		      "UTF-8", charset, bytes_read, bytes_written, error);
+#else
+	return g_strdup(opsysstring);
+#endif
 }
 
 /**

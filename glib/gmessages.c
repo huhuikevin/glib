@@ -1639,14 +1639,14 @@ g_printerr (const gchar *format,
     {
       const gchar *charset;
 
-      if (g_get_charset (&charset))
+      if (0)//g_get_charset (&charset))
         fputs (string, stderr); /* charset is UTF-8 already */
       else
         {
-          gchar *lstring = strdup_convert (string, charset);
+          //gchar *lstring = strdup_convert (string, charset);
 
-          fputs (lstring, stderr);
-          g_free (lstring);
+          fputs (string, stderr);
+          //g_free (lstring);
         }
       fflush (stderr);
     }
